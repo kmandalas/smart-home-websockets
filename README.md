@@ -54,7 +54,8 @@ curl --location --request POST 'http://localhost:8000/control-service/device' \
 Then you can monitor the device-client / device-management service logs to see the transmitted messages
 
 ## Locust scripts
-To be added soon
+You may find them [here](https://github.com/kmandalas/smart-home-websockets/tree/master/locust)
+Check the [documentation](https://docs.locust.io/en/stable/running-locust-distributed.html) for adapting them to your needs.
 
 ## Contact details
 Feel free to contact us for any questions or suggestions at: kmandalas@gmail.com or submit a github issue.
