@@ -14,10 +14,10 @@ spring:
 
 broker:
   relay:
-    host: ${activemq.host:localhost}
+    host: ${activemq.host:10.132.0.8}
     user: admin
-    password: admin
-  url: tcp://${activemq.host:localhost}:61616
+    password:
+  url: tcp://${activemq.host:10.132.0.8}:61616
   queue: actions.queue
   topic: actions.topic
 
@@ -30,6 +30,18 @@ eureka:
     healthcheck:
       enabled: false
     serviceUrl:
-      defaultZone: http://${eureka.host:127.0.0.1}:${eureka.port:8761}/eureka/
+      defaultZone: http://${eureka.host:10.132.0.2}:${eureka.port:8761}/eureka/
   instance:
     preferIpAddress: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always
+  metrics:
+    tags:
+      application: ${spring.application.name}

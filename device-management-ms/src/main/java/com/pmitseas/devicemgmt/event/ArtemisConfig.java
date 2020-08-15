@@ -33,6 +33,7 @@ public class ArtemisConfig {
 		connectionFactory.setUser(username);
 		connectionFactory.setPassword(password);
 		connectionFactory.setConnectionTTL(120000L);
+
 		return connectionFactory;
 	}
 
@@ -41,7 +42,9 @@ public class ArtemisConfig {
 		DefaultJmsListenerContainerFactory factory = new DefaultJmsListenerContainerFactory();
 		factory.setConnectionFactory(receiverActiveMQConnectionFactory());
 		factory.setMessageConverter(jacksonJmsMessageConverter());
+
 		factory.setConcurrency("3-10");
+
 		return factory;
 	}
 
@@ -51,8 +54,10 @@ public class ArtemisConfig {
 		converter.setTargetType(MessageType.TEXT);
 		HashMap<String, Class<?>> typeIdMappings = new HashMap<>();
 		typeIdMappings.put(ActionEvent.class.getSimpleName(), ActionEvent.class);
+		typeIdMappings.put(ActionResultEvent.class.getSimpleName(), ActionResultEvent.class);
 		converter.setTypeIdMappings(typeIdMappings);
 		converter.setTypeIdPropertyName("_type");
+
 		return converter;
 	}
 
@@ -60,5 +65,14 @@ public class ArtemisConfig {
 	public CachingConnectionFactory cachingConnectionFactory() {
 		return new CachingConnectionFactory(receiverActiveMQConnectionFactory());
 	}
+
+	@Bean("jmsTopicTemplate")
+	public JmsTemplate jmsTopicTemplate() {
+		JmsTemplate jmsTemplate = new JmsTemplate(cachingConnectionFactory());
+		jmsTemplate.setMessageConverter(jacksonJmsMessageConverter());
+		jmsTemplate.setPubSubDomain(true);
+		return jmsTemplate;
+	}
+
 }
 
