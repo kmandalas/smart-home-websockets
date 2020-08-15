@@ -55,6 +55,7 @@ Then you can monitor the device-client / device-management service logs to see t
 
 ## Locust scripts
 You may find them [here](https://github.com/kmandalas/smart-home-websockets/tree/master/locust)
+
 Check the [documentation](https://docs.locust.io/en/stable/running-locust-distributed.html) for adapting them to your needs.
 
 ## Contact details
